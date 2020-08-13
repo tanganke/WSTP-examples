@@ -1,6 +1,29 @@
 #include "WSTPLink.h"
 #include <iostream>
-#include <boost/timer/timer.hpp>
+#include <pthread.h>
+
+
+
+void example(WSLINK link);
+void* parallel_example(void* link);
+
+int main(int argc, char **argv)
+{
+    WSTPLink wstp_link;
+    example(wstp_link.link);
+
+    WSTPLink links[4];
+    pthread_t threads[4];
+    for(int i=0;i<4;i++)
+    {
+        pthread_create(threads+i,NULL,parallel_example,links[i].link);
+    }
+    for(int i=0;i<4;i++)
+    {
+        pthread_join(threads[i],nullptr);
+    }
+}
+
 
 void example(WSLINK link)
 {
@@ -24,10 +47,8 @@ void example(WSLINK link)
     std::cout << i << std::endl;
 }
 
-int main(int argc, char **argv)
+void* parallel_example(void* link)
 {
-    WSTPLink wstp_link{"/usr/local/bin/WolframKernel"};
-
-    boost::timer::auto_cpu_timer timer;
-    example(wstp_link.link);
+    example((WSLINK)link);
+    return nullptr;
 }
