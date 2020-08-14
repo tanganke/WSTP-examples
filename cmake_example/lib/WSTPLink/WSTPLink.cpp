@@ -31,8 +31,7 @@ WSTPLink::WSTPLink(std::string path)
         std::cout << WSErrorMessage(link) << '\n';
         exit(EXIT_FAILURE);
     }
-
-    WSFlush(link);
+    WSActivate(link);
 }
 
 WSTPLink::~WSTPLink()
@@ -40,4 +39,15 @@ WSTPLink::~WSTPLink()
     WSPutFunction(link, "Exit", 0);
     WSClose(link);
     WSDeinitialize(env);
+}
+
+int WSTPLink::SetHistoryLength(int i)
+{
+    PutFunction("EvaluateFunction",1);
+    PutFunction("Set",2);
+    PutSymbol("$HistoryLength");
+    PutInteger(i);
+    EndPacket();
+    Flush();
+    return WaitAndDiscardAnswer();
 }
