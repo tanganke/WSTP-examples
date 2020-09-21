@@ -1,5 +1,4 @@
-
-
+/*
 :Begin:
 :Function:       addtwo
 :Pattern:        AddTwo[i_Integer, j_Integer]
@@ -18,3 +17,24 @@
 :ArgumentTypes: {IntegerList,Integer,Integer}
 :ReturnType: Integer
 :End:
+*/
+
+// comments
+/*dfs
+sdfsdaf
+sd*/
+int addtwo(int i, int j)
+{
+    return i + j;
+}
+
+int addList(int *list, long j, int k, int m)
+{
+    //return 1;
+    int sum = 0;
+    for (int i = 0; i < j; ++i)
+    {
+        sum += list[i];
+    }
+    return sum * k;
+}

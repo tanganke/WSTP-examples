@@ -31,7 +31,10 @@ WSTPLink::WSTPLink(std::string path)
         std::cout << WSErrorMessage(link) << '\n';
         exit(EXIT_FAILURE);
     }
-    WSActivate(link);
+    if(!WSActivate(link))
+    {
+        std::cout<<"Unable to establish WSTP communication.\n";
+    }
 }
 
 WSTPLink::~WSTPLink()

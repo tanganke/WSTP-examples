@@ -25,8 +25,9 @@ struct WSRealList
 };
 class WSTPLink
 {
-public:
+private:
     WSENV env;
+public:
     WSLINK link;
     int error, packet;
     // use a default kernel path: /usr/local/bin/math

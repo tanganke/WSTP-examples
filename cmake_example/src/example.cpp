@@ -14,7 +14,7 @@ main(int argc, char** argv)
 {
     WSTPLink wstp_link;
     wstp_link.SetHistoryLength(0);
-    wstp_link.LogStreamToFile("log.txt");
+    wstp_link.LogStreamToFile("/dev/stdout");
 
     // Total[Range[0,999]]
     example(wstp_link.link);
